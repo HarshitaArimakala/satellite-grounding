@@ -1,0 +1,13 @@
+bin/
+include/
+lib/
+share/
+pyvenv.cfg
+__pycache__/
+*.pyc
+.DS_Store
+data/*
+!data/.gitkeep
+outputs/*
+!outputs/.gitkeep
+.ipynb_checkpoints/
