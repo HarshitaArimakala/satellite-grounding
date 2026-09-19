@@ -33,7 +33,6 @@ def predict(image, query):
     best = res["scores"].argmax()
     return res["boxes"][best].tolist(), res["scores"][best].item()
 
-# ---- ADAPT THIS to however you saved your 15 triples ----
 def load_samples():
     return json.load(open("data/sample/samples.json"))   # [{"image":..., "query":..., "box":[x1,y1,x2,y2]}, ...]
 
