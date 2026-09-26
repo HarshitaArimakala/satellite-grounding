@@ -1,5 +1,6 @@
 import os, json
 os.environ["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+import sys
 import torch
 from pathlib import Path
 from PIL import Image, ImageDraw
@@ -26,7 +27,7 @@ def predict(image, query):
     with torch.no_grad():
         outputs = model(**inputs)
     res = processor.post_process_grounded_object_detection(
-        outputs, inputs.input_ids, threshold=0.1, text_threshold=0.1,
+        outputs, inputs.input_ids, threshold=0.05, text_threshold=0.1,
         target_sizes=[image.size[::-1]])[0]
     if len(res["boxes"]) == 0:
         return None, 0.0
