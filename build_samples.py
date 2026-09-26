@@ -2,7 +2,7 @@ import json, re, random, shutil
 from pathlib import Path
 from PIL import Image
 
-IMG_DIR = Path("data/images/Images_val")     # adjust if ls above shows a different path
+IMG_DIR = Path("data/images/Images_val")
 OUT_DIR = Path("data/sample"); OUT_DIR.mkdir(exist_ok=True)
 
 records = json.load(open("data/VRSBench_EVAL_referring.json"))
@@ -12,13 +12,13 @@ print(len(records), "records. Example:", records[0])
 nums = [int(n) for r in records for n in re.findall(r"<(\d+)>", r["ground_truth"])]
 print("box number range:", min(nums), "to", max(nums))
 
-random.seed(0)                # fixed seed so you get the same 15 every time
+random.seed(0)       
 random.shuffle(records)
 
 samples, seen = [], set()
 for r in records:
     if r["image_id"] in seen or not (IMG_DIR / r["image_id"]).exists():
-        continue              # one query per image, and only images you downloaded
+        continue           
     coords = [int(n) for n in re.findall(r"<(\d+)>", r["ground_truth"])]
     if len(coords) != 4:
         continue
